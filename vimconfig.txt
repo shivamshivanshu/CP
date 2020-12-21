@@ -1,0 +1,29 @@
+syntax on
+set autoindent
+set smartindent
+set number
+set noswapfile
+set nobackup
+set tabstop=4 softtabstop=5
+set expandtab
+set incsearch
+set nowrap
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'frazrepo/vim-rainbow'
+Plugin 'itchyny/lightline.vim'
+Plugin 'preservim/nerdtree'
+Plugin 'morhetz/gruvbox'
+Plugin 'lyuts/vim-rtags'
+call vundle#end()
+colorscheme gruvbox
+set background=dark
+filetype plugin indent on
+
+map! jk <Esc> " map jk to Esc
