@@ -59,7 +59,7 @@ template<class T> bool chmin(T& a, const T b) { if (b < a) { a = b; return 1; } 
 template<typename T> void db(T var)	{cerr << var << " ";}
 template<typename T, typename... Types> void db(T var1, Types... var2)	{cerr << var1 << " "; db(var2...);}
 template<typename T> void print(T var)	{cout << var << endl;}
-template<typename T, typename... Types> void print(T var1, Types... var2)	{cerr << var1 << " "; print(var2...);}
+template<typename T, typename... Types> void print(T var1, Types... var2)	{cout << var1 << " "; print(var2...);}
 bool isPrime(int n)
 {
 	if (n <= 1)
