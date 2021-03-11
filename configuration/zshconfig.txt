@@ -99,12 +99,19 @@ source $ZSH/oh-my-zsh.sh
 
 # c++ compilation shortcuts -- begin
 alias comp='g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result'
+alias compilationflags='g++ -std=c++17 -O2 -Wall -Wextra -Wno-unused-result -Wno-char-subscripts -Wshadow -Wfloat-equal -Wconversion -Wformat-signedness -Wvla -Wduplicated-cond -Wlogical-op'
+alias buildflags='g++ -std=c++17 -O0 -Wall -Wextra -Wno-unused-result -Wno-char-subscripts -Wshadow -Wfloat-equal -Wconversion -Wformat-signedness -Wvla -Wduplicated-cond -Wlogical-op -Wredundant-decls -ggdb3 -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=undefined,address,float-divide-by-zero,float-cast-overflow -fno-omit-frame-pointer -fno-optimize-sibling-calls -fstack-protector-all -fno-sanitize-recover=all'
 function compile() { 
-        comp $1 && ./a.out
+        compilationflags $1 && echo "Success!\n" &&  ./a.out
 }
-export -f compile
+function buildit(){
+        buildflags $1 && echo "Success!\n" && ./a.out
+}
+function fastc(){
+        comp $1 && echo "Success!\n" && ./a.out
+}
+# export -f compile
 alias rn='./a.out'
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/shivam/go/src/github.com/xalanq/cf-tool
 # c++ compilation shortcuts -- ends
-#
