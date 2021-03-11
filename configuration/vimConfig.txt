@@ -23,7 +23,6 @@ Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdtree'
 Plugin 'lyuts/vim-rtags'
 Plugin 'vim-airline/vim-airline'
-Plugin 'Raimondi/delimitMate'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'vim-syntastic/syntastic'
@@ -31,7 +30,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
-
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()
 call glaive#Install() 
 colorscheme gruvbox
@@ -44,6 +44,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 map <silent> <F5> : NERDTreeToggle<CR>
 " setup for ctrlp
+let g:rainbow_active = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -81,3 +82,4 @@ let g:indentLine_char = '│'
 set tags=./tags,tags;$HOME
 
 map! jk <Esc> " map jk to Esc
+autocmd BufNewFile *.cc 0r ~/.vim/templates/skeleton.cc
