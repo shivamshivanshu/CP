@@ -1,15 +1,20 @@
 syntax on
 set autoindent
+set clipboard=unnamed
 set number
 set cursorline
 set encoding=utf-8
 set noswapfile
 set nobackup
-set tabstop=4 softtabstop=4
+set mouse=a
+set tabstop=4
+set softtabstop=4
 set expandtab
 set incsearch
 set nowrap
-set colorcolumn=80
+set relativenumber
+set incsearch
+set colorcolumn=160
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 set nocompatible
 filetype off
@@ -19,23 +24,20 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'frazrepo/vim-rainbow'
 Plugin 'itchyny/lightline.vim'
-Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdtree'
-Plugin 'lyuts/vim-rtags'
 Plugin 'vim-airline/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Yggdroot/indentLine'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'google/vim-maktaba'
-Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'morhetz/gruvbox'
 call vundle#end()
 call glaive#Install() 
-colorscheme gruvbox
 set background=dark
+colorscheme gruvbox
 filetype plugin indent on
 
 " open NERDTree automatically when vim starts up on opening a directory
@@ -50,36 +52,22 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+                        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+                        \ 'file': '\v\.(exe|so|dll)$',
+                        \ 'link': 'some_bad_symbolic_links',
+                        \ }
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-" setup for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8']
+autocmd BufNewFile *.cpp 0r ~/.vim/templates/cptemplate.cpp
+map! jk <Esc> 
+noremap <F10> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< < inp<CR>
+inoremap <F10> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o "%<" "%" && "./%<" < inp<CR>
 
-" autoformat
-augroup autoformat_settings
-  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
-  autocmd FileType python AutoFormatBuffer yapf
-augroup END
-" use google style for clang-format
-Glaive codefmt clang_format_style='google'
-" setup for tagbar
-nmap <F8> :TagbarToggle<CR>
+noremap <F9> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>
+inoremap <F9> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>
 
-" setup for indent line
-let g:indentLine_char = '│'
-set tags=./tags,tags;$HOME
-
-map! jk <Esc> " map jk to Esc
-autocmd BufNewFile *.cc 0r ~/.vim/templates/skeleton.cc
+augroup autoindent
+        au!
+        autocmd BufWritePre * :normal migg=G`i
+augroup End
