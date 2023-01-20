@@ -7,8 +7,10 @@ set encoding=utf-8
 set noswapfile
 set nobackup
 set mouse=a
-set tabstop=4
-set softtabstop=4
+set tabstop=8
+set softtabstop=0
+set shiftwidth=4
+set smarttab
 set expandtab
 set incsearch
 set nowrap
@@ -66,8 +68,3 @@ inoremap <F10> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -
 
 noremap <F9> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>
 inoremap <F9> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>
-
-augroup autoindent
-        au!
-        autocmd BufWritePre * :normal migg=G`i
-augroup End
