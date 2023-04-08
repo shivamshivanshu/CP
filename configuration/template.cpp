@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define fo(i, n) for (int i = 0; i < n; i++)
+#define fo(i, n) for (decltype(n) i = 0; i < n; i++)
 #define ll long long int
 #define ull unsigned long long int
 #define deb(x) std::cerr << #x << "=" << x << '\n'
@@ -27,29 +27,45 @@ int rng(int lim)
     return uid(rang);
 }
 template <typename T>
-void db(T var) { std::cerr << var << '\n'; }
+void db(T &var) { std::cerr << var << '\n'; }
 template <typename T, typename... Types>
-void db(T var1, Types... var2)
+void db(T &var1, Types &...var2)
 {
     std::cerr << var1 << " ";
     db(var2...);
 }
 template <typename T>
-void print(T var) { std::cout << var << '\n'; }
+void print(const T &var) { std::cout << var << '\n'; }
 template <typename T, typename... Types>
-void print(T var1, Types... var2)
+void print(const T &var1, const Types &...var2)
 {
     std::cout << var1 << " ";
     print(var2...);
 }
 template <typename T>
-void print_container(const T &container)
+void prtc(const T &container)
 {
-    for (auto element : container)
+    for (auto &element : container)
     {
         std::cout << element << " ";
     }
     std::cout << '\n';
+}
+template <typename T>
+void inp(T &var) { std::cin >> var; }
+template <typename T, typename... Types>
+void inp(T &var1, Types &...var2)
+{
+    std::cin >> var1;
+    inp(var2...);
+}
+template <typename T>
+void inpc(T &container)
+{
+    for (auto &element : container)
+    {
+        std::cin >> element;
+    }
 }
 template <typename T>
 bool isPrime(T n)
@@ -67,10 +83,27 @@ bool isPrime(T n)
 
     return true;
 }
+template <typename T>
+int64_t power(T a, T b, T m)
+{
+    if (b == 0)
+        return 1;
+    else if (b == 1)
+        return a % m;
+    else
+    {
+        if (b % 2)
+            return (a * (power(a, b - 1, m))) % m;
+        else
+        {
+            auto tmp = power(a, b / 2, m);
+            return (tmp * tmp) % m;
+        }
+    }
+}
 const ll INF = 1e18;
 const ll mod = 1e9 + 7;
 const int N = 2e5 + 5, M = N;
-
 void solve()
 {
 }
